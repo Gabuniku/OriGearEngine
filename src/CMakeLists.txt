@@ -1,8 +1,10 @@
 
 add_library(ogeg
-        core.cpp
+        engine.cpp
         window.cpp
         renderer.cpp
+        util.cpp
+        abs/destroyable.cpp
 )
 
 add_subdirectory(media)

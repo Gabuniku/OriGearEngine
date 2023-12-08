@@ -11,12 +11,11 @@ namespace OGEG {
     }
 
     Window::~Window() {
-        //Destroy();
+        Destroy();
     }
 
     void Window::Destroy() {
         if (!_destroy) {
-            puts("Destroy Window");
             SDL_DestroyWindow(_window);
             _window = nullptr;
             _destroy = true;

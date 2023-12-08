@@ -2,19 +2,24 @@
 // Created by gabuniku on 2023/11/26.
 //
 
-#ifndef SDL_ENGINE_TEXTURE_HPP
-#define SDL_ENGINE_TEXTURE_HPP
-#include "stdio.h"
+#ifndef ORIGEAR_TEXTURE_HPP
+#define ORIGEAR_TEXTURE_HPP
+
+#include <cstdio>
+#include <SDL2/SDL_render.h>
+#include "../abs/destroyable.hpp"
 
 namespace OGEG {
 
-    class Texture {
+    class Texture : public Destroyable {
+    private:
+        SDL_Texture *_ptr;
     public:
-        Texture(){
-            puts("HELLLLLLLLOOOOOO");
-        }
+        explicit Texture(const char *path);
+
+        void Destroy() override;
     };
 
 } // OriGearEngine
 
-#endif //SDL_ENGINE_TEXTURE_HPP
+#endif //ORIGEAR_TEXTURE_HPP

@@ -6,22 +6,21 @@
 
 namespace OGEG {
 
-    Renderer::Renderer(SDL_Renderer *ptr) {
+    Renderer::Renderer(SDL_Renderer *ptr) : Destroyable() {
         _renderer = ptr;
-        _destroy = false;
+        //_destroy = false;
     }
 
-    Renderer::~Renderer() {
-       // Destroy();
-    }
+    Renderer::~Renderer() = default;
 
     void Renderer::Destroy() {
-        if (!_destroy) {
-            SDL_DestroyRenderer(_renderer);
-            _renderer = nullptr;
-            _destroy = true;
-            puts("Destroy Renderer");
-        }
+        SDL_DestroyRenderer(_renderer);
+        // if (!_destroy) {
+        //     puts("Des");
+        //     SDL_DestroyRenderer(_renderer);
+        //     _renderer = nullptr;
+        //     _destroy = true;
+        // }
     }
 
 } // OGEG

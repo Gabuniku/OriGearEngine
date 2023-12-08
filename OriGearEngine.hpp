@@ -6,7 +6,6 @@
 #define ORIGEAR_ORIGEARENGINE_HPP
 
 #include "include/core.hpp"
-#include "include/window.hpp"
 
 #include "include/media/media.hpp"
 

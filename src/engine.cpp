@@ -11,17 +11,19 @@ namespace OGEG {
     OriGearEngine::OriGearEngine() {}
 
     OriGearEngine::~OriGearEngine() {
+        DeInit();
     }
 
     bool OriGearEngine::Init() {
         if (SDL_Init(SDL_INIT_VIDEO) != 0)
             _init = false;
-        _init = true;
+        else
+            _init = true;
         return _init;
     }
 
     bool OriGearEngine::DeInit() {
-      //  Destroy();
+        Destroy();
         if (_init) {
             SDL_Quit();
             _init = false;

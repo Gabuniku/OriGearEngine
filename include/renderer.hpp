@@ -5,20 +5,21 @@
 #ifndef ORIGEAR_RENDERER_HPP
 #define ORIGEAR_RENDERER_HPP
 
+#include "abs/destroyable.hpp"
 #include <memory>
 #include <SDL2/SDL.h>
 
 namespace OGEG {
 
-    class Renderer {
+    class Renderer : public Destroyable {
     private:
-        bool _destroy = true;
         SDL_Renderer *_renderer = nullptr;
     public:
-        Renderer(SDL_Renderer *ptr);
+        explicit Renderer(SDL_Renderer *ptr);
+
         ~Renderer();
 
-        void Destroy();
+        void Destroy() override;
     };
 
 } // OGEG
