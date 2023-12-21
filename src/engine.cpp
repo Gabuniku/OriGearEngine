@@ -2,9 +2,11 @@
 // Created by gabuniku on 2023/11/26.
 //
 
-#include "core.hpp"
+#include "engine.hpp"
 
 #include <SDL2/SDL.h>
+#include <SDL2/SDL_mixer.h>
+#include <SDL2/SDL_ttf.h>
 
 namespace OGEG {
 
@@ -15,45 +17,30 @@ namespace OGEG {
     }
 
     bool OriGearEngine::Init() {
-        if (SDL_Init(SDL_INIT_VIDEO) != 0)
-            _init = false;
-        else
-            _init = true;
-        return _init;
+        return Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO);
+    }
+
+
+    bool OriGearEngine::Init(uint32_t flag) {
+        if (SDL_Init(flag) >= 0)
+            _init_main = true;
+
+        // init mixer
+        if (TTF_Init() >= 0)
+            _init_ttf = true;
+        return _init_main || _init_ttf;
     }
 
     bool OriGearEngine::DeInit() {
-        Destroy();
-        if (_init) {
+        if (_init_main) {
             SDL_Quit();
-            _init = false;
+            _init_main = false;
+        }
+        if (_init_ttf) {
+            TTF_Quit();
+            _init_ttf = false;
         }
         return true;
     }
 
-    void OriGearEngine::Destroy() {
-        if (_renderer) {
-            _renderer->Destroy();
-            _renderer.reset();
-        }
-        if (window) {
-            window->Destroy();
-            window.reset();
-        }
-    }
-
-    bool OriGearEngine::CreateWindow(const std::string &name, int width, int height) {
-        if (!_init)
-            return false;
-        SDL_Window *win;
-        SDL_Renderer *ren;
-        if (SDL_CreateWindowAndRenderer(width, height, 0, &win, &ren)) {
-            return false;
-        }
-        window = std::make_shared<Window>(win);
-        _renderer = std::make_shared<Renderer>(ren);
-
-        window->SetTitle(name);
-        return true;
-    }
 }

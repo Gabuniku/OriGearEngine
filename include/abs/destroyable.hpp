@@ -16,7 +16,7 @@ namespace OGEG {
     public:
         Destroyable();
 
-        ~Destroyable();
+        virtual ~Destroyable();
 
         virtual void Destroy();
 

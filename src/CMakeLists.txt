@@ -3,8 +3,10 @@ add_library(ogeg
         engine.cpp
         window.cpp
         renderer.cpp
+        texture.cpp
+        surface.cpp
+        clock.cpp
         util.cpp
-        abs/destroyable.cpp
 )
 
 add_subdirectory(media)

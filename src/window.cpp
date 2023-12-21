@@ -5,25 +5,22 @@
 #include "window.hpp"
 
 namespace OGEG {
-    Window::Window(SDL_Window *ptr) {
-        _window = ptr;
-        _destroy = false;
+    Window::Window(const char *title, int w, int h, int x, int y, uint32_t flag) : _ptr(nullptr, SDL_DestroyWindow) {
+        _ptr.reset(SDL_CreateWindow(title, x, y, w, h, flag));
     }
 
-    Window::~Window() {
-        Destroy();
-    }
+    Window::~Window() = default;
 
-    void Window::Destroy() {
-        if (!_destroy) {
-            SDL_DestroyWindow(_window);
-            _window = nullptr;
-            _destroy = true;
+    std::optional<Renderer> Window::CreateRenderer(int index, uint32_t flag) {
+        SDL_Renderer *ptr = SDL_CreateRenderer(_ptr.get(), index, flag);
+        if (ptr == nullptr) {
+            return std::nullopt;
         }
+        return Renderer(ptr);
     }
 
     void Window::SetTitle(const std::string &title) {
-        SDL_SetWindowTitle(_window, title.c_str());
+        SDL_SetWindowTitle(_ptr.get(), title.c_str());
     }
 
 } // OGEG

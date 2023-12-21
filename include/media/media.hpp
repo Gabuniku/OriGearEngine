@@ -5,6 +5,7 @@
 #ifndef ORIGEAR_MEDIA_HPP
 #define ORIGEAR_MEDIA_HPP
 
-#include "texture.hpp"
+#include "image.hpp"
+#include "font.hpp"
 
 #endif //ORIGEAR_MEDIA_HPP

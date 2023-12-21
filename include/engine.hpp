@@ -16,11 +16,10 @@ namespace OGEG {
 
     class OriGearEngine {
     private:
-        bool _init = false;
-        std::shared_ptr<Renderer> _renderer;
+        bool _init_main = false;
+        bool _init_mixer = false;
+        bool _init_ttf = false;
     public:
-
-        std::shared_ptr<Window> window;
 
         OriGearEngine();
 
@@ -28,12 +27,9 @@ namespace OGEG {
 
         bool Init();
 
+        bool Init(uint32_t flag);
+
         bool DeInit();
-
-        void Destroy();
-
-        bool CreateWindow(const std::string &name, int width, int height);
-
     };
 }
 

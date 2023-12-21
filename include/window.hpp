@@ -8,20 +8,21 @@
 
 #include <memory>
 #include <string>
+#include <optional>
 #include <SDL2/SDL_video.h>
+#include "renderer.hpp"
 
 namespace OGEG {
 
     class Window {
     private:
-        bool _destroy = true;
-        SDL_Window *_window = nullptr;
+        std::unique_ptr<SDL_Window, decltype(&SDL_DestroyWindow)> _ptr;
     public:
-        Window(SDL_Window *ptr);
+        Window(const char *title, int w, int h, int x = SDL_WINDOWPOS_CENTERED, int y = SDL_WINDOWPOS_CENTERED, uint32_t flag = 0);
 
         ~Window();
 
-        void Destroy();
+        std::optional<Renderer> CreateRenderer(int index = -1, uint32_t flag = 0);
 
         void SetTitle(const std::string &title);
     };
